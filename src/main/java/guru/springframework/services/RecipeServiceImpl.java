@@ -1,5 +1,6 @@
 package guru.springframework.services;
 
+import guru.springframework.commands.RecipeCommand;
 import guru.springframework.domain.Recipe;
 import guru.springframework.repositories.RecipeRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -29,5 +30,15 @@ public class RecipeServiceImpl implements RecipeService {
         Set<Recipe> recipeSet = new HashSet<>();
         recipeRepository.findAll().iterator().forEachRemaining(recipeSet::add);
         return recipeSet;
+    }
+
+    @Override
+    public Recipe findById(Long l){
+        return recipeRepository.findById(l).orElseThrow(() -> new RuntimeException("Recipe not found"));
+    }
+
+    @Override
+    public RecipeCommand saveRecipeCommand(RecipeCommand command){
+        return command;
     }
 }

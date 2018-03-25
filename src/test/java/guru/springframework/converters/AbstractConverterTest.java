@@ -14,7 +14,7 @@ public abstract class AbstractConverterTest<T extends Converter, U>{
     protected U command;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() throws Exception{
         converter = getInstanceOfT();
         command = getInstanceOfU();
         init();
@@ -23,39 +23,31 @@ public abstract class AbstractConverterTest<T extends Converter, U>{
     public abstract void init();
 
     @Test
-    public void testNullObject() throws Exception {
+    public void testNullObject() throws Exception{
         assertNull(converter.convert(null));
     }
 
     @Test
-    public void testEmptyObject() throws Exception {
+    public void testEmptyObject() throws Exception{
         assertNotNull(converter.convert(command));
     }
 
-    private T getInstanceOfT()
-    {
+    private T getInstanceOfT(){
         ParameterizedType superClass = (ParameterizedType) getClass().getGenericSuperclass();
         Class<T> type = (Class<T>) superClass.getActualTypeArguments()[0];
-        try
-        {
+        try{
             return type.newInstance();
-        }
-        catch (Exception e)
-        {
+        }catch(Exception e){
             return null;
         }
     }
 
-    private U getInstanceOfU()
-    {
+    private U getInstanceOfU(){
         ParameterizedType superClass = (ParameterizedType) getClass().getGenericSuperclass();
         Class<U> type = (Class<U>) superClass.getActualTypeArguments()[1];
-        try
-        {
+        try{
             return type.newInstance();
-        }
-        catch (Exception e)
-        {
+        }catch(Exception e){
             return null;
         }
     }
