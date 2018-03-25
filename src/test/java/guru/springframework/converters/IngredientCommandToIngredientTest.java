@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 
 import static org.junit.Assert.*;
 
-public class IngredientCommandToIngredientTest {
+public class IngredientCommandToIngredientTest extends AbstractConverterTest<IngredientCommandToIngredient, IngredientCommand>{
 
     public static final Recipe RECIPE = new Recipe();
     public static final BigDecimal AMOUNT = new BigDecimal("1");
@@ -19,21 +19,8 @@ public class IngredientCommandToIngredientTest {
     public static final Long ID_VALUE = new Long(1L);
     public static final Long UOM_ID = new Long(2L);
 
-    IngredientCommandToIngredient converter;
-
-    @Before
-    public void setUp() throws Exception {
+    public void init(){
         converter = new IngredientCommandToIngredient(new UnitOfMeasureCommandToUnitOfMeasure());
-    }
-
-    @Test
-    public void testNullObject() throws Exception {
-        assertNull(converter.convert(null));
-    }
-
-    @Test
-    public void testEmptyObject() throws Exception {
-        assertNotNull(converter.convert(new IngredientCommand()));
     }
 
     @Test

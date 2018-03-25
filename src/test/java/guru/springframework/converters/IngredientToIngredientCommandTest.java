@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 /**
  * Created by jt on 6/21/17.
  */
-public class IngredientToIngredientCommandTest {
+public class IngredientToIngredientCommandTest extends AbstractConverterTest<IngredientToIngredientCommand, Ingredient>{
 
     public static final Recipe RECIPE = new Recipe();
     public static final BigDecimal AMOUNT = new BigDecimal("1");
@@ -22,22 +22,9 @@ public class IngredientToIngredientCommandTest {
     public static final Long UOM_ID = new Long(2L);
     public static final Long ID_VALUE = new Long(1L);
 
-
-    IngredientToIngredientCommand converter;
-
-    @Before
-    public void setUp() throws Exception {
+    @Override
+    public void init(){
         converter = new IngredientToIngredientCommand(new UnitOfMeasureToUnitOfMeasureCommand());
-    }
-
-    @Test
-    public void testNullConvert() throws Exception {
-        assertNull(converter.convert(null));
-    }
-
-    @Test
-    public void testEmptyObject() throws Exception {
-        assertNotNull(converter.convert(new Ingredient()));
     }
 
     @Test

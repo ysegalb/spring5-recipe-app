@@ -7,27 +7,14 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class UnitOfMeasureCommandToUnitOfMeasureTest {
+public class UnitOfMeasureCommandToUnitOfMeasureTest extends AbstractConverterTest<UnitOfMeasureCommandToUnitOfMeasure, UnitOfMeasureCommand>{
 
     public static final String DESCRIPTION = "description";
     public static final Long LONG_VALUE = new Long(1L);
 
-    UnitOfMeasureCommandToUnitOfMeasure converter;
+    @Override
+    public void init(){
 
-    @Before
-    public void setUp() throws Exception {
-        converter = new UnitOfMeasureCommandToUnitOfMeasure();
-
-    }
-
-    @Test
-    public void testNullParamter() throws Exception {
-        assertNull(converter.convert(null));
-    }
-
-    @Test
-    public void testEmptyObject() throws Exception {
-        assertNotNull(converter.convert(new UnitOfMeasureCommand()));
     }
 
     @Test

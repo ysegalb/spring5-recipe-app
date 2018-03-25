@@ -10,15 +10,14 @@ import static org.junit.Assert.*;
 /**
  * Created by jt on 6/21/17.
  */
-public class NotesToNotesCommandTest {
+public class NotesToNotesCommandTest extends AbstractConverterTest<NotesToNotesCommand, Notes> {
 
     public static final Long ID_VALUE = new Long(1L);
     public static final String RECIPE_NOTES = "Notes";
-    NotesToNotesCommand converter;
 
-    @Before
-    public void setUp() throws Exception {
-        converter = new NotesToNotesCommand();
+    @Override
+    public void init(){
+
     }
 
     @Test
@@ -36,13 +35,4 @@ public class NotesToNotesCommandTest {
         assertEquals(RECIPE_NOTES, notesCommand.getRecipeNotes());
     }
 
-    @Test
-    public void testNull() throws Exception {
-        assertNull(converter.convert(null));
-    }
-
-    @Test
-    public void testEmptyObject() throws Exception {
-        assertNotNull(converter.convert(new Notes()));
-    }
 }

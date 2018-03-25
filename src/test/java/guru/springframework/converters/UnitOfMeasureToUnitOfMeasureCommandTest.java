@@ -10,27 +10,13 @@ import static org.junit.Assert.*;
 /**
  * Created by jt on 6/21/17.
  */
-public class UnitOfMeasureToUnitOfMeasureCommandTest {
+public class UnitOfMeasureToUnitOfMeasureCommandTest extends AbstractConverterTest<UnitOfMeasureToUnitOfMeasureCommand, UnitOfMeasure> {
 
     public static final String DESCRIPTION = "description";
     public static final Long LONG_VALUE = new Long(1L);
 
-    UnitOfMeasureToUnitOfMeasureCommand converter;
-
-    @Before
-    public void setUp() throws Exception {
-        converter = new UnitOfMeasureToUnitOfMeasureCommand();
-    }
-
-    @Test
-    public void testNullObjectConvert() throws Exception {
-        assertNull(converter.convert(null));
-    }
-
-    @Test
-    public void testEmptyObj() throws Exception {
-        assertNotNull(converter.convert(new UnitOfMeasure()));
-    }
+    @Override
+    public void init(){ }
 
     @Test
     public void convert() throws Exception {

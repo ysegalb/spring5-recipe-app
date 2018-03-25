@@ -7,26 +7,14 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class NotesCommandToNotesTest {
+public class NotesCommandToNotesTest extends AbstractConverterTest<NotesCommandToNotes, NotesCommand>{
 
     public static final Long ID_VALUE = new Long(1L);
     public static final String RECIPE_NOTES = "Notes";
-    NotesCommandToNotes converter;
 
-    @Before
-    public void setUp() throws Exception {
-        converter = new NotesCommandToNotes();
+    @Override
+    public void init(){
 
-    }
-
-    @Test
-    public void testNullParameter() throws Exception {
-        assertNull(converter.convert(null));
-    }
-
-    @Test
-    public void testEmptyObject() throws Exception {
-        assertNotNull(converter.convert(new NotesCommand()));
     }
 
     @Test

@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class RecipeToRecipeCommandTest {
+public class RecipeToRecipeCommandTest extends AbstractConverterTest<RecipeToRecipeCommand, Recipe>{
 
     public static final Long RECIPE_ID = 1L;
     public static final Integer COOK_TIME = Integer.valueOf("5");
@@ -23,24 +23,13 @@ public class RecipeToRecipeCommandTest {
     public static final Long INGRED_ID_1 = 3L;
     public static final Long INGRED_ID_2 = 4L;
     public static final Long NOTES_ID = 9L;
-    RecipeToRecipeCommand converter;
 
-    @Before
-    public void setUp() throws Exception {
+    @Override
+    public void init(){
         converter = new RecipeToRecipeCommand(
                 new CategoryToCategoryCommand(),
                 new IngredientToIngredientCommand(new UnitOfMeasureToUnitOfMeasureCommand()),
                 new NotesToNotesCommand());
-    }
-
-    @Test
-    public void testNullObject() throws Exception {
-        assertNull(converter.convert(null));
-    }
-
-    @Test
-    public void testEmptyObject() throws Exception {
-        assertNotNull(converter.convert(new Recipe()));
     }
 
     @Test
