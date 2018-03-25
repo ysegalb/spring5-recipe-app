@@ -1,5 +1,9 @@
 package guru.springframework.converters;
 
+import java.util.HashSet;
+
+import guru.springframework.commands.CategoryCommand;
+import guru.springframework.commands.IngredientCommand;
 import guru.springframework.commands.RecipeCommand;
 import guru.springframework.domain.Category;
 import guru.springframework.domain.Recipe;
@@ -33,28 +37,29 @@ public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand>{
             return null;
         }
 
-        final RecipeCommand command = new RecipeCommand();
-        command.setId(source.getId());
-        command.setCookTime(source.getCookTime());
-        command.setPrepTime(source.getPrepTime());
-        command.setDescription(source.getDescription());
-        command.setDifficulty(source.getDifficulty());
-        command.setDirections(source.getDirections());
-        command.setServings(source.getServings());
-        command.setSource(source.getSource());
-        command.setUrl(source.getUrl());
-        command.setNotes(notesConverter.convert(source.getNotes()));
+        final RecipeCommand.RecipeCommandBuilder command = RecipeCommand.builder();
+        command.id(source.getId())
+        .cookTime(source.getCookTime())
+        .prepTime(source.getPrepTime())
+        .description(source.getDescription())
+        .difficulty(source.getDifficulty())
+        .directions(source.getDirections())
+        .servings(source.getServings())
+        .source(source.getSource())
+        .url(source.getUrl())
+        .notes(notesConverter.convert(source.getNotes()));
 
-        if (source.getCategories() != null && source.getCategories().size() > 0){
-            source.getCategories()
-                    .forEach((Category category) -> command.getCategories().add(categoryConveter.convert(category)));
-        }
 
-        if (source.getIngredients() != null && source.getIngredients().size() > 0){
-            source.getIngredients()
-                    .forEach(ingredient -> command.getIngredients().add(ingredientConverter.convert(ingredient)));
-        }
+        HashSet<CategoryCommand> categories = new HashSet<>();
+        source.getCategories().iterator()
+                .forEachRemaining(cat -> categories.add(categoryConveter.convert(cat)));
+        command.categories(categories);
 
-        return command;
+        HashSet<IngredientCommand> ingredients = new HashSet<>();
+        source.getIngredients().iterator()
+                .forEachRemaining(i -> ingredients.add(ingredientConverter.convert(i)));
+        command.ingredients(ingredients);
+
+        return command.build();
     }
 }
